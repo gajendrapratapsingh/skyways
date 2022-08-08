@@ -46,10 +46,10 @@ class _ReimbursementScreenState extends State<ReimbursementScreen> {
                           children: [
                             IconButton(onPressed: (){
                               Navigator.pop(context);
-                            }, icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black)),
+                            }, icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black)),
                             Padding(
                                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22),
-                                child: const Text("Reibursement List",
+                                child: const Text("Reimbursement List",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.black87,

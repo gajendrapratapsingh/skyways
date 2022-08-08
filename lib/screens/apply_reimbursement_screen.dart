@@ -251,10 +251,10 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                           borderRadius: BorderRadius.circular(25)
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10.0),
+                                        padding: const EdgeInsets.only(left: 10.0),
                                         child: DropdownButtonHideUnderline(
                                           child: DropdownButton<String>(
-                                            hint: Text("Expense Type", style: TextStyle(color: Colors.black)),
+                                            hint: const Text("Expense Type", style: TextStyle(color: Colors.black)),
                                             value: expensetype,
                                             elevation: 16,
                                             style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
@@ -304,16 +304,12 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            docPic == "Select Document Proof" || docPic == null || docPic.toString() == "" ? SizedBox() : CircleAvatar(
+                                              docPic == "Select Document Proof" || docPic == null || docPic.toString() == "" ? const SizedBox() : CircleAvatar(
                                               radius: 18,
                                               backgroundImage: FileImage(File(_imageCheque.path)),
                                             ),
-                                            SizedBox(width: 5.0),
-                                            Expanded(
-                                                child: Text('$docPic',
-                                                    style: TextStyle(
-                                                        color: Colors.grey[600], fontSize: 14.0)),
-                                            ),
+                                            const SizedBox(width: 5.0),
+                                            Expanded(child: Text('$docPic', style: TextStyle(color: Colors.grey[600], fontSize: 14.0))),
                                             RaisedButton(
                                                 color: Colors.grey,
                                                 elevation: 0,

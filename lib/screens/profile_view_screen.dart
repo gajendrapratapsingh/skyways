@@ -118,7 +118,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         designation: designation,
                       ),
                       //SizedBox(height: SizeConfig.defaultSize * 2), //20
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: Row(
@@ -154,16 +154,16 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text("Joining Date", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
-                                    SizedBox(height: 2.0),
-                                    Text(joiningdate, style: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.bold)),
+                                    const Text("Joining Date", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                                    const SizedBox(height: 2.0),
+                                    joiningdate == null ? SizedBox() : Text(joiningdate, style: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                               )
                             ]
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
                         child: Container(
@@ -180,7 +180,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 Text("Company", style: TextStyle(color: Colors.black, fontSize: 14.0)),
+                                 const Text("Company", style: TextStyle(color: Colors.black, fontSize: 14.0)),
                                  Text(company, textAlign: TextAlign.start, style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
                               ],
                             ),
@@ -226,7 +226,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                  const Text("Date of Birth", style: TextStyle(color: Colors.black, fontSize: 14.0)),
-                                 Text(dobmonth, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold))
+                                 dobmonth == null ? SizedBox() : Text(dobmonth, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold))
                               ],
                             ),
                           ),

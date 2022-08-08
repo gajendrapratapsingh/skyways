@@ -60,92 +60,6 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
   List<String> _branchdata = [];
 
 
-  void _showOverlay(BuildContext context) async {
-    OverlayState overlayState = Overlay.of(context);
-    OverlayEntry overlayEntry2;
-
-    overlayEntry2 = OverlayEntry(builder: (context) {
-      return Positioned(
-        left: 5.0,
-        right: 5.0,
-        top: MediaQuery.of(context).size.height * 0.19,
-        child: Card(
-          elevation: 5.0,
-          child: Container(
-              padding:
-                  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.15,
-              color: Colors.white.withOpacity(0.3),
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                          onTap: () {
-                            overlayEntry2.remove();
-                          },
-                          child: const Icon(Icons.close, size: 18.0, color: Colors.black)),
-                    ),
-                    SizedBox(height: 2.0),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                          onTap: () {
-                            //displayBottomSheet();
-                            overlayEntry2.remove();
-                          },
-                          child: const Text("Branch",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 2.0),
-                    /*Divider(height: 1.0, color: Colors.grey),
-                   SizedBox(height: 2.0),
-                   Padding(
-                     padding: const EdgeInsets.all(4.0),
-                     child: Align(
-                       alignment: Alignment.topLeft,
-                       child: GestureDetector(
-                         onTap: (){},
-                         child: Text("Location", style: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w500)),
-                       ),
-                     ),
-                   ),*/
-                    //SizedBox(height: 2.0),
-                    /*Divider(height: 1.0, color: Colors.grey,),
-                   SizedBox(height: 2.0),
-                   Padding(
-                     padding: const EdgeInsets.all(4.0),
-                     child: Align(
-                       alignment: Alignment.topLeft,
-                       child: GestureDetector(
-                         onTap: (){},
-                         child: Text("Others", style: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w500)),
-                       ),
-                     ),
-                   ),*/
-                  ],
-                ),
-              )),
-        ),
-      );
-    });
-
-    overlayState.insert(overlayEntry2);
-    await Future.delayed(Duration(seconds: 20));
-
-    overlayEntry2.remove();
-  }
 
   List<Data> _emplist = List<Data>();
   List<Data> _searchResult = List<Data>();
@@ -160,7 +74,6 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
     _companylist();
     controller.addListener(() {
       if(controller.position.pixels == controller.position.maxScrollExtent && isListing) {
-        print("hello kunal");
         employeelist(branch_id, company_id);
       }
     });

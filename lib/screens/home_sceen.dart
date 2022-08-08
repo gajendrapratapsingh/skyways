@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -15,7 +14,6 @@ import 'package:skyways_group/constants/constant.dart';
 import 'package:skyways_group/constants/dialog_helper.dart';
 import 'package:skyways_group/enums.dart';
 import 'package:skyways_group/model/employeelistdata.dart';
-import 'package:expandable/expandable.dart';
 import 'package:skyways_group/screens/announcement_screen.dart';
 import 'package:skyways_group/screens/apply_reimbursement_screen.dart';
 import 'package:skyways_group/screens/birthday_and_anniversary_screen.dart';
@@ -83,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       prefs.setString('departmentname', _employeeslist[0].deptName);
       prefs.setString('designation', _employeeslist[0].desigName);
     } else {
-      print(response.body);
       throw Exception('Failed to get data due to ${response.body}');
     }
   }
@@ -117,12 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 50,
                       fit: BoxFit.cover,
                     ),
-                    /*Text("SLS Theo",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w700)),*/
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                       child: Row(
@@ -150,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Navigator.pushNamed(context, '/profilescreen');
                             },
@@ -166,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
                                     image: photo == "" || photo == null
-                                        ? AssetImage('assets/images/ic_profile.png')
+                                        ? const AssetImage('assets/images/ic_profile.png')
                                         : NetworkImage(photo),
                                   )
                               ),
@@ -175,16 +166,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    _announcenoticelist.isEmpty || _announcenoticelist.length == 0 ? SizedBox() : GestureDetector(
+                    _announcenoticelist.isEmpty || _announcenoticelist.length == 0 ? const SizedBox() : InkWell(
                       onTap: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
+                        Navigator.of(context).push(PageRouteBuilder(
                             transitionDuration: const Duration(milliseconds: 800),
-                            reverseTransitionDuration:
-                            const Duration(milliseconds: 800),
+                            reverseTransitionDuration: const Duration(milliseconds: 800),
                             opaque: false,
-                            pageBuilder: (context, animation, _) {
-                              return AnnouncementScreen();
+                            pageBuilder: (context, animation, _) {return AnnouncementScreen();
                             },
                           ),
                         );
@@ -208,10 +196,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                      mainAxisAlignment: MainAxisAlignment.start,
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
-                                       SizedBox(height: 4.0),
-                                       Text("${_announcenoticelist[index]['title'].toString()}", style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500)),
-                                       Text("${_announcenoticelist[index]['desc'].toString()}", style: TextStyle(color: Colors.black, fontSize: 12)),
-                                       SizedBox(height: 4.0)
+                                       const SizedBox(height: 4.0),
+                                       Text(_announcenoticelist[index]['title'].toString(), style: const TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500)),
+                                       Text(_announcenoticelist[index]['desc'].toString(), style: const TextStyle(color: Colors.black, fontSize: 12)),
+                                       const SizedBox(height: 4.0)
                                      ],
                                    );
                                 },
@@ -233,9 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20.0, top: 10.0, right: 20.0),
+                          Padding(padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
                               child: ItemInfo(checksupervisor: checksupervisor, title : title)),
                         ],
                       ),
@@ -246,14 +232,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
+        bottomNavigationBar: const CustomBottomNavBar(selectedMenu: MenuState.home),
       ),
     );
   }
 
   Future _noticelist() async {
-    /* List<NoticeData> noticelist = [];
-    noticelist.clear();*/
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final body = {
       "api_access_token": "ywrtaw46veltitizqhbs",

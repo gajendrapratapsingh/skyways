@@ -67,10 +67,10 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                     children: [
                       IconButton(onPressed: (){
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-                      }, icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
+                      }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
                       Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20),
-                          child: Text("Leave Application",
+                          child: const Text("Leave Application",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black87,
@@ -79,7 +79,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                const SizedBox(height: 15),
                 Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
@@ -103,10 +103,9 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                                 Navigator.pushReplacementNamed(context, '/leaveapplyscreen');
                               },
                               child: Container(
-                                height:
-                                MediaQuery.of(context).size.height * 0.06,
-                                width:
-                                MediaQuery.of(context).size.width * 0.35,
+                                //height: MediaQuery.of(context).size.height * 0.06,
+                                //width: MediaQuery.of(context).size.width * 0.35,
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     color: Colors.grey.shade300,
@@ -120,10 +119,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                               ),
                             ),
                             Container(
-                              height:
-                              MediaQuery.of(context).size.height * 0.06,
-                              width:
-                              MediaQuery.of(context).size.width * 0.35,
+                              padding : const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                               alignment: Alignment.center,
                               decoration: const BoxDecoration(
                                   color: Colors.black,
@@ -137,7 +133,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       const Padding(
                         padding: EdgeInsets.only(left: 10.0),
                         child: Align(

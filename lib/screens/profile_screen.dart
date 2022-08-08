@@ -45,14 +45,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getProfileDetails();
   }
 
   _getProfileDetails() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('employee_id'));
+    setState((){
+       photo = prefs.getString('emp_image');
+    });
     final body = {
       "api_access_token" : "ywrtaw46veltitizqhbs",
       "employee_id" : prefs.getString('employee_id')
@@ -62,7 +63,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: body,
     );
     if (response.statusCode == 200) {
-
       Iterable list = json.decode(response.body)['data'];
       var _employeeslist = list.map((m) => Data.fromJson(m)).toList();
       setState(() {
@@ -80,7 +80,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         department = _employeeslist[0].deptName;
       });
     } else {
-      print(response.body);
       throw Exception('Failed to get data due to ${response.body}');
     }
   }
@@ -144,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),*/
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0,  right: 15.0),
+                  padding: const EdgeInsets.only(left: 15.0,  right: 15.0),
                   child: Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -182,9 +181,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text("Net Salary", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
-                                SizedBox(height: 2.0),
-                                salaryVisibility == false ? Text("******", style: TextStyle(color: Colors.white, fontSize: 14.0)) : Text(salary == "" || salary == null ? "" : salary, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                                const Text("Net Salary", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                                const SizedBox(height: 2.0),
+                                salaryVisibility == false ? const Text("******", style: TextStyle(color: Colors.white, fontSize: 14.0)) : Text(salary == "" || salary == null ? "" : salary, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14.0)),
                               ],
                             ),
                           ),
@@ -257,14 +256,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: kCornerShapeColor,
       leading: IconButton(onPressed:(){
         Navigator.pop(context);
-      }, icon: Icon(
-        Icons.arrow_back_ios,
-        size: 20.0,
-        color: Colors.white,
+      }, icon: const Icon(Icons.arrow_back_ios, size: 20.0, color: Colors.white,
       ),
       ),
       centerTitle: true,
-      title: Text("Profile", style: TextStyle(color: Colors.white)),
+      title: const Text("Profile", style: TextStyle(color: Colors.white)),
       actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -272,7 +268,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                onTap: (){
                  DialogHelper.logout(context);
                },
-               child: Icon(Icons.logout, size: 24.0, color: Colors.white),
+               child: const Icon(Icons.logout, size: 24.0, color: Colors.white),
             ),
           )
       ],

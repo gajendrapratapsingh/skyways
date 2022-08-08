@@ -59,33 +59,21 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                     children: [
                       IconButton(onPressed: (){
                         Navigator.pop(context);
-                      }, icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
+                      }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
                       Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22),
-                          child: Text(
-                              "Leave Request",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.black87,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold))),
+                          child: const Text("Leave Request", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
                     ],
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                const SizedBox(height: 20),
                 Expanded(
-                  //height: MediaQuery.of(context).size.height * 0.86,
-                  //width: double.infinity,
-                  /*decoration: const BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0))),*/
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 10.0, right: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: FutureBuilder(
                             future: _getleaverqtlist(),
                             builder: (context, AsyncSnapshot snapshot) {
@@ -95,7 +83,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                               if (!snapshot.hasData) {
                                 return Container(
                                   height: MediaQuery.of(context).size.height/1.5,
-                                  child: Center(
+                                  child: const Center(
                                     child: CircularProgressIndicator(color: kPrimaryColor),
                                   ),
                                 );
@@ -103,7 +91,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                               else if(list.isEmpty){
                                  return Container(
                                    height: MediaQuery.of(context).size.height/1.5,
-                                   child: Center(
+                                   child: const Center(
                                      child: Text("No Data Available"),
                                    ),
                                  );
@@ -111,6 +99,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                               else {
                                 return ListView.separated(
                                   padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
                                   separatorBuilder: (context, index) {
                                     return const Divider(
                                         color: Colors.transparent,
@@ -153,54 +142,52 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                    Row(
                      children: [
                        const Text("Employee ID : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                       Text(empid, style: const TextStyle(fontSize: 14.0, color: Colors.green))
+                       Text(empid, style: const TextStyle(fontSize: 14.0, color: Colors.black))
                      ],
                    ),
-                   fulldayvalue == "1" ? Row(
+                     fulldayvalue == "1" ? Row(
                      mainAxisSize: MainAxisSize.min,
                      children: const[
                         Text("Leave Type : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                        Text("HALF DAY", style: TextStyle(fontSize: 14.0, color: Colors.green))
+                        Text("HALF DAY", style: TextStyle(fontSize: 14.0, color: Colors.black))
                      ],
                    ) : Row(
                      mainAxisSize: MainAxisSize.min,
                      children: const[
                        Text("Leave Type : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                       Text("FULL DAY", style: TextStyle(fontSize: 14.0, color: Colors.green))
+                       Text("FULL DAY", style: TextStyle(fontSize: 14.0, color: Colors.black))
                      ],
                    )
                 ],
               ),
-              SizedBox(height: 15.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(height: 15.0),
+              Row (
                 children: [
-                  Flexible(
-                      flex: 2,
-                      child:  fulldayvalue == "1" ? Row(
-                         children: [
-                            const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                            halfdaydate.toString() == "null" || halfdaydate.toString()== "" ? Text("") : Text(halfdaydate, style: const TextStyle(color: Colors.green, fontSize: 14.0))
-                         ],
-                      ) : Row(
-                        children: [
-                          //Text("Leave Date : ")
-                          const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                          Text(fulldayfromdate+" to "+fulldaytodate, style: const TextStyle(color: Colors.green, fontSize: 14.0))
-                        ],
-                      )
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.60,
+                    child: fulldayvalue == "1" ? Row(
+                      children: [
+                        const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
+                        halfdaydate.toString() == "null" || halfdaydate.toString()== "" ? const SizedBox() : Text(halfdaydate, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0))
+                      ],
+                    ) : Row(
+                      children: [
+                        const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
+                        Expanded(child: Text(fulldayfromdate+" to "+fulldaytodate, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0)))
+                      ],
+                    ),
                   ),
                   getStaus(leavestatus)
                 ],
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Row(
                 children: [
                    const Text("Leave Reason : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                   Text(leavereason, style: const TextStyle(color: Colors.green, fontSize: 14.0))
+                  leavereason == null ? const SizedBox() : Expanded(child: Text(leavereason, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0)))
                 ],
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [

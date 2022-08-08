@@ -78,8 +78,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
     //_departmentlist();
 
     initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
@@ -292,24 +291,20 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                      child: Row(
-                        children: [
-                          IconButton(onPressed: (){
-                            Navigator.pop(context);
-                          }, icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20),
-                              child: Text("Leave Application", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20),
+                            child: const Text("Leave Application", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
+                      ],
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    const SizedBox(height: 10),
                     SingleChildScrollView(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.85,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                             color: Colors.transparent,
@@ -321,15 +316,13 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
+                              padding: const EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    height: MediaQuery.of(context).size.height * 0.06,
-                                    width: MediaQuery.of(context).size.width * 0.35,
+                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                                     alignment: Alignment.center,
                                     decoration: const BoxDecoration(
                                         color: Colors.black,
@@ -343,15 +336,13 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.pushNamed(
-                                          context, '/leavestatusscreen');
+                                      Navigator.pushNamed(context, '/leavestatusscreen');
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height *
-                                          0.06,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.35,
+                                      //height: MediaQuery.of(context).size.height * 0.06,
+                                      //width: MediaQuery.of(context).size.width * 0.35,
                                       alignment: Alignment.center,
+                                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
                                           borderRadius: BorderRadius.all(Radius.circular(25.0))),
@@ -365,19 +356,15 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                               child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.76,
-                                width: MediaQuery.of(context).size.width,
+                                 height: MediaQuery.of(context).size.height * 0.76,
+                                //width: MediaQuery.of(context).size.width,
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                          height: MediaQuery.of(context).size
-                                                  .height *
-                                              0.04),
+                                      SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                                       _textField(empname),
                                       const SizedBox(height: 2.0),
                                       _textField(empdesignation),
@@ -425,7 +412,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                         padding: const EdgeInsets.only(left: 10.0),
                                                         child: Row(
                                                           children: [
-                                                            empdepartment == "" || empdepartment == null ? Text("") : Text(empdepartment, style: TextStyle(color: Colors.black)),
+                                                            empdepartment == "" || empdepartment == null ? const SizedBox() : Expanded(child: Text(empdepartment, style: TextStyle(color: Colors.black))),
                                                           ],
                                                         ),
                                                       )),
@@ -458,7 +445,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                                 left: 10.0),
                                                         child: Row(
                                                           children: [
-                                                            empbranch == "" || empbranch == null ? Text("") : Text(empbranch, style: TextStyle(color: Colors.black),
+                                                            empbranch == "" || empbranch == null ? const SizedBox() : Expanded(
+                                                              child: Text(empbranch, style: const TextStyle(color: Colors.black),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -473,8 +462,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                       _textField(reportingmanager),
                                       const SizedBox(height: 2.0),
                                       Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, right: 10.0),
+                                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -510,7 +498,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                   color: Colors.grey.shade300,
                                                   width: MediaQuery.of(context).size.width * 0.42,
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(left: 5.0, top: 7.0),
+                                                    padding: const EdgeInsets.only(left: 5.0, top: 7.0),
                                                     child: Column(
                                                       crossAxisAlignment:
                                                       CrossAxisAlignment
@@ -522,7 +510,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                                     .grey,
                                                                 fontSize:
                                                                 14.0)),
-                                                        SizedBox(height: 4.0),
+                                                        const SizedBox(height: 4.0),
                                                         el == null || el == ""
                                                             ? const Text("", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold))
                                                             : Text(el, style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
@@ -533,7 +521,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 2.0),
+                                      const SizedBox(height: 2.0),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 15.0, right: 20.0),
@@ -796,7 +784,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                       Visibility(
                                         visible: _requesttypevisibility,
                                         child: Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 10.0, right: 10.0),
                                           child: Card(
                                             color: Colors.grey.shade300,
@@ -814,11 +802,11 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                           25)),
                                               child: Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 10.0),
+                                                const EdgeInsets.only(left: 10.0),
                                                 child:
                                                     DropdownButtonHideUnderline(
                                                   child: DropdownButton<String>(
-                                                    hint: Text("Request Type",
+                                                    hint: const Text("Request Type",
                                                         style: TextStyle(
                                                             color:
                                                                 Colors.black)),
@@ -861,7 +849,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                       Visibility(
                                         visible: _halfdaydateVisibilty,
                                         child: Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 10.0, right: 10.0),
                                           child: GestureDetector(
                                             onTap: () {
@@ -989,14 +977,14 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
 
   Widget _textInputField(String text, TextEditingController _controller) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Card(
         elevation: 4.0,
         color: Colors.grey.shade300,
         child: Container(
           height: MediaQuery.of(context).size.height * 0.06,
           width: double.infinity,
-          padding: EdgeInsets.only(left: 10.0),
+          padding: const EdgeInsets.only(left: 10.0),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
               color: Colors.grey.shade300,
@@ -1017,7 +1005,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
 
   Widget _textField(String text) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Card(
         color: Colors.grey.shade300,
         elevation: 4.0,
@@ -1033,7 +1021,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                 children: [
                   Text(
                     text == null || text == "" ? "" : text,
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ],
               ),
