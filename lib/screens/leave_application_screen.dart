@@ -78,7 +78,8 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
     //_departmentlist();
 
     initConnectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
@@ -108,33 +109,34 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime.now().subtract(Duration(days: 0)),
-        //firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101),
-        builder: (BuildContext context, Widget child) {
-          return Theme(
-            data: ThemeData(
-                primaryColor: Color(0xFFfca404),
-                accentColor: Color(0xFFfca404),
-                primarySwatch: MaterialColor(0xFFfca404,
-                  <int, Color>{
-                    50:  Color(0xFFfca404),
-                    100: Color(0xFFfca404),
-                    200: Color(0xFFfca404),
-                    300: Color(0xFFfca404),
-                    400: Color(0xFFfca404),
-                    500: Color(0xFFfca404),
-                    600: Color(0xFFfca404),
-                    700: Color(0xFFfca404),
-                    800: Color(0xFFfca404),
-                    900: Color(0xFFfca404),
-                  },
-                )),
-            child: child,
-          );
-        },
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now().subtract(Duration(days: 0)),
+      //firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+              primaryColor: Color(0xFFfca404),
+              accentColor: Color(0xFFfca404),
+              primarySwatch: MaterialColor(
+                0xFFfca404,
+                <int, Color>{
+                  50: Color(0xFFfca404),
+                  100: Color(0xFFfca404),
+                  200: Color(0xFFfca404),
+                  300: Color(0xFFfca404),
+                  400: Color(0xFFfca404),
+                  500: Color(0xFFfca404),
+                  600: Color(0xFFfca404),
+                  700: Color(0xFFfca404),
+                  800: Color(0xFFfca404),
+                  900: Color(0xFFfca404),
+                },
+              )),
+          child: child,
+        );
+      },
     );
 
     if (picked != null && picked != selectedDate)
@@ -145,33 +147,34 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
 
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedStartDate,
-        firstDate: DateTime.now().subtract(Duration(days: 0)),
-        //firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101),
-        builder: (BuildContext context, Widget child) {
-         return Theme(
-              data: ThemeData(
-               primaryColor: Color(0xFFfca404),
-               accentColor: Color(0xFFfca404),
-               primarySwatch: MaterialColor(0xFFfca404,
+      context: context,
+      initialDate: selectedStartDate,
+      firstDate: DateTime.now().subtract(Duration(days: 0)),
+      //firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+              primaryColor: Color(0xFFfca404),
+              accentColor: Color(0xFFfca404),
+              primarySwatch: MaterialColor(
+                0xFFfca404,
                 <int, Color>{
-                50:  Color(0xFFfca404),
-                100: Color(0xFFfca404),
-                200: Color(0xFFfca404),
-                300: Color(0xFFfca404),
-                400: Color(0xFFfca404),
-                500: Color(0xFFfca404),
-                600: Color(0xFFfca404),
-                700: Color(0xFFfca404),
-                800: Color(0xFFfca404),
-                900: Color(0xFFfca404),
-              },
-            )),
-        child: child,
-      );
-    },
+                  50: Color(0xFFfca404),
+                  100: Color(0xFFfca404),
+                  200: Color(0xFFfca404),
+                  300: Color(0xFFfca404),
+                  400: Color(0xFFfca404),
+                  500: Color(0xFFfca404),
+                  600: Color(0xFFfca404),
+                  700: Color(0xFFfca404),
+                  800: Color(0xFFfca404),
+                  900: Color(0xFFfca404),
+                },
+              )),
+          child: child,
+        );
+      },
     );
 
     if (picked != null && picked != selectedStartDate)
@@ -197,9 +200,10 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
             data: ThemeData(
                 primaryColor: Color(0xFFfca404),
                 accentColor: Color(0xFFfca404),
-                primarySwatch: MaterialColor(0xFFfca404,
+                primarySwatch: MaterialColor(
+                  0xFFfca404,
                   <int, Color>{
-                    50:  Color(0xFFfca404),
+                    50: Color(0xFFfca404),
                     100: Color(0xFFfca404),
                     200: Color(0xFFfca404),
                     300: Color(0xFFfca404),
@@ -212,8 +216,8 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                   },
                 )),
             child: child,
-          );}
-    );
+          );
+        });
 
     if (picked != null && picked != selectedEndDate)
       setState(() {
@@ -256,6 +260,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
     return _updateConnectionStatus(result);
   }
 
+  GlobalKey key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
@@ -271,7 +276,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           Positioned(
@@ -288,581 +293,130 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(onPressed: (){
-                          Navigator.pop(context);
-                        }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20),
-                            child: const Text("Leave Application", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    SingleChildScrollView(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0))),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                                    alignment: Alignment.center,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(25.0))),
-                                    child: const Text("Create Leaves",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14.0)),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pushNamed(context, '/leavestatusscreen');
-                                    },
-                                    child: Container(
-                                      //height: MediaQuery.of(context).size.height * 0.06,
-                                      //width: MediaQuery.of(context).size.width * 0.35,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back_ios,
+                                  color: Colors.black, size: 20)),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.20),
+                              child: const Text("Leave Application",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold))),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, top: 20.0, right: 20.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
                                       alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade300,
-                                          borderRadius: BorderRadius.all(Radius.circular(25.0))),
-                                      child: const Text("Leave Status",
+                                      decoration: const BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0))),
+                                      child: const Text("Create Leaves",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14.0)),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/leavestatusscreen');
+                                      },
+                                      child: Container(
+                                          //height: MediaQuery.of(context).size.height * 0.06,
+                                          //width: MediaQuery.of(context).size.width * 0.35,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 15),
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey.shade300,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(25.0))),
+                                          child: const Text("Leave Status",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14.0))),
-                                  ),
-                                ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                              child: Container(
-                                 height: MediaQuery.of(context).size.height * 0.76,
-                                //width: MediaQuery.of(context).size.width,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                                      _textField(empname),
-                                      const SizedBox(height: 2.0),
-                                      _textField(empdesignation),
-                                      const SizedBox(height: 2.0),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, right: 10.0),
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.06,
-                                          width: double.infinity,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.07,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.44,
-                                                child: Card(
-                                                  color: Colors.grey.shade300,
-                                                  elevation: 4.0,
-                                                  child: Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.07,
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors
-                                                              .grey.shade300,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      25)),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.only(left: 10.0),
-                                                        child: Row(
-                                                          children: [
-                                                            empdepartment == "" || empdepartment == null ? const SizedBox() : Expanded(child: Text(empdepartment, style: TextStyle(color: Colors.black))),
-                                                          ],
-                                                        ),
-                                                      )),
-                                                ),
-                                              ),
-                                              Container(
-                                                height: MediaQuery.of(context).size.height * 0.07,
-                                                width: MediaQuery.of(context).size.width * 0.44,
-                                                child: Card(
-                                                  color: Colors.grey.shade300,
-                                                  elevation: 4.0,
-                                                  child: Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.07,
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors
-                                                              .grey.shade300,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      15)),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 10.0),
-                                                        child: Row(
-                                                          children: [
-                                                            empbranch == "" || empbranch == null ? const SizedBox() : Expanded(
-                                                              child: Text(empbranch, style: const TextStyle(color: Colors.black),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 2.0),
-                                      _textField(reportingmanager),
-                                      const SizedBox(height: 2.0),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Card(
-                                              elevation: 4.0,
-                                              child: Container(height: MediaQuery.of(context).size.height * 0.07,
-                                                  color: Colors.grey.shade300,
-                                                  width: MediaQuery.of(context).size.width * 0.42,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(left: 5.0, top: 7.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text("Remaining CL",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey,
-                                                                fontSize:
-                                                                    14.0)),
-                                                        SizedBox(height: 4.0),
-                                                        cl == null || cl == ""
-                                                            ? const Text("", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold))
-                                                            : Text(cl, style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
-                                                      ],
-                                                    ),
-                                                  )),
-                                            ),
-                                            Card(
-                                              elevation: 4.0,
-                                              child: Container(height: MediaQuery.of(context).size.height * 0.07,
-                                                  color: Colors.grey.shade300,
-                                                  width: MediaQuery.of(context).size.width * 0.42,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 5.0, top: 7.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
-                                                      children: [
-                                                        const Text("Remaining EL",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey,
-                                                                fontSize:
-                                                                14.0)),
-                                                        const SizedBox(height: 4.0),
-                                                        el == null || el == ""
-                                                            ? const Text("", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold))
-                                                            : Text(el, style: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
-                                                      ],
-                                                    ),
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(height: 2.0),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 15.0, right: 20.0),
-                                        child: Container(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10.0),
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.76,
+                                  //width: MediaQuery.of(context).size.width,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.07,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  child: const Text("Apply Leave",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                Container(
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Checkbox(
-                                                        checkColor:
-                                                            Colors.white,
-                                                        activeColor:
-                                                            kPrimaryColor,
-                                                        value: fulldaytypevalue,
-                                                        onChanged: (newValue) {
-                                                          if (newValue ==
-                                                              true) {
-                                                            setState(() {
-                                                              leavetypeValue =
-                                                                  "2";
-                                                              fulldaytypevalue =
-                                                                  newValue;
-                                                              halfdaytypevalue =
-                                                                  false;
-
-                                                              _fboxvisibility =
-                                                                  true;
-                                                              _fullleavedateVisibility =
-                                                                  true;
-                                                              _hboxvisibility =
-                                                                  false;
-                                                              _requesttypevisibility =
-                                                                  false;
-                                                              _halfdaydateVisibilty =
-                                                                  false;
-                                                            });
-                                                          }
-                                                        },
-                                                      ),
-                                                      const Text("FULL DAY",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                      const SizedBox(
-                                                          width: 5.0),
-                                                      Checkbox(
-                                                        checkColor:
-                                                            Colors.white,
-                                                        activeColor:
-                                                            kPrimaryColor,
-                                                        value: halfdaytypevalue,
-                                                        onChanged: (newValue) {
-                                                          if (newValue ==
-                                                              true) {
-                                                            setState(() {
-                                                              leavetypeValue =
-                                                                  "1";
-                                                              fulldaytypevalue =
-                                                                  false;
-                                                              halfdaytypevalue =
-                                                                  newValue;
-
-                                                              _fboxvisibility =
-                                                                  false;
-                                                              _fullleavedateVisibility =
-                                                                  false;
-                                                              _hboxvisibility =
-                                                                  true;
-                                                              _requesttypevisibility =
-                                                                  true;
-                                                              _halfdaydateVisibilty =
-                                                                  true;
-                                                            });
-                                                          }
-                                                        },
-                                                      ),
-                                                      const Text("HALF DAY",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            )),
-                                      ),
-                                      const SizedBox(height: 2.0),
-                                      Visibility(
-                                        visible: _fullleavedateVisibility,
-                                        child: Padding(
+                                                0.04),
+                                        _textField(empname),
+                                        const SizedBox(height: 2.0),
+                                        _textField(empdesignation),
+                                        const SizedBox(height: 2.0),
+                                        Padding(
                                           padding: const EdgeInsets.only(
                                               left: 10.0, right: 10.0),
                                           child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.06,
-                                            width: double.infinity,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    _selectStartDate(context);
-                                                  },
-                                                  child: Card(
-                                                    elevation: 4.0,
-                                                    child: Container(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.06,
-                                                        color:
-                                                            Colors
-                                                                .grey.shade300,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.42,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          10.0),
-                                                              child: Text(
-                                                                startDate,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade700,
-                                                                    fontSize:
-                                                                        16.0),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            10.0),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {
-                                                                    _selectStartDate(
-                                                                        context);
-                                                                  },
-                                                                  child: Image
-                                                                      .asset(
-                                                                          'assets/icons/calendar.png'),
-                                                                )),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    _selectedEndDate(context);
-                                                  },
-                                                  child: Card(
-                                                    color: Colors.grey.shade300,
-                                                    elevation: 4.0,
-                                                    child: Container(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.09,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.42,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          10.0),
-                                                              child: Text(
-                                                                endDate,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade700,
-                                                                    fontSize:
-                                                                        16.0),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            10.0),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {
-                                                                    _selectedEndDate(
-                                                                        context);
-                                                                  },
-                                                                  child: Image
-                                                                      .asset(
-                                                                          'assets/icons/calendar.png'),
-                                                                )),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Visibility(
-                                          visible: _fboxvisibility,
-                                          child: const SizedBox(height: 2.0)),
-                                      Visibility(
-                                        visible: _requesttypevisibility,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, right: 10.0),
-                                          child: Card(
-                                            color: Colors.grey.shade300,
-                                            elevation: 4.0,
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.06,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.shade300,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          25)),
-                                              child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(left: 10.0),
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton<String>(
-                                                    hint: const Text("Request Type",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black)),
-                                                    value: leavereqtypeValue,
-                                                    elevation: 16,
-                                                    style: TextStyle(
-                                                        color: Colors
-                                                            .grey.shade700,
-                                                        fontSize: 16),
-                                                    onChanged: (String data) {
-                                                      setState(() {
-                                                        leavereqtypeValue =
-                                                            data;
-                                                        if (leavereqtypeValue ==
-                                                            "Seconf Half") {
-                                                          leaverq = "2";
-                                                        } else {
-                                                          leaverq = "1";
-                                                        }
-                                                      });
-                                                    },
-                                                    items: leavetypeItems.map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 2.0),
-                                      Visibility(
-                                        visible: _halfdaydateVisibilty,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, right: 10.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              _selectDate(context);
-                                            },
+                                            // height: MediaQuery.of(context)
+                                            //         .size
+                                            //         .height *
+                                            //     0.07,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             child: Card(
                                               color: Colors.grey.shade300,
                                               elevation: 4.0,
                                               child: Container(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.06,
+                                                  // height: MediaQuery.of(context)
+                                                  //         .size
+                                                  //         .height *
+                                                  //     0.07,
+
                                                   width: double.infinity,
                                                   decoration: BoxDecoration(
                                                       color:
@@ -870,104 +424,686 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               25)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 10.0),
-                                                        child: Text(
-                                                          selectedDate.day
-                                                                  .toString() +
-                                                              "-" +
-                                                              selectedDate.month
-                                                                  .toString() +
-                                                              "-" +
-                                                              selectedDate.year
-                                                                  .toString(),
-                                                          style: TextStyle(
-                                                              color: Colors.grey
-                                                                  .shade700,
-                                                              fontSize: 16.0),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 10.0),
-                                                          child:
-                                                              GestureDetector(
-                                                            onTap: () {
-                                                              _selectDate(
-                                                                  context);
-                                                            },
-                                                            child: Image.asset(
-                                                                'assets/icons/calendar.png'),
-                                                          )),
-                                                    ],
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Row(
+                                                      children: [
+                                                        empdepartment == "" ||
+                                                                empdepartment ==
+                                                                    null
+                                                            ? const SizedBox()
+                                                            : Expanded(
+                                                                child: Text(
+                                                                    empdepartment,
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black))),
+                                                      ],
+                                                    ),
                                                   )),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Visibility(
-                                          visible: _hboxvisibility,
-                                          child: SizedBox(height: 2.0)),
-                                      _textInputField(
-                                          "Additional Note", reasonController),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          height: 45.0,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: kPrimaryColor,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
+                                        const SizedBox(height: 2.0),
+                                        _textField(reportingmanager),
+                                        const SizedBox(height: 2.0),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10.0, right: 10.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Card(
+                                                elevation: 4.0,
+                                                child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.07,
+                                                    color: Colors.grey.shade300,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.42,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 5.0, top: 7.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const Text(
+                                                              "Remaining CL",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize:
+                                                                      14.0)),
+                                                          SizedBox(height: 4.0),
+                                                          cl == null || cl == ""
+                                                              ? const Text("",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold))
+                                                              : Text(cl,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                        ],
+                                                      ),
+                                                    )),
+                                              ),
+                                              Card(
+                                                elevation: 4.0,
+                                                child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.07,
+                                                    color: Colors.grey.shade300,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.42,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5.0,
+                                                              top: 7.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const Text(
+                                                              "Remaining EL",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize:
+                                                                      14.0)),
+                                                          const SizedBox(
+                                                              height: 4.0),
+                                                          el == null || el == ""
+                                                              ? const Text("",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold))
+                                                              : Text(el,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                        ],
+                                                      ),
+                                                    )),
+                                              ),
+                                            ],
                                           ),
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              if (reasonController.text
-                                                  .toString()
-                                                  .isEmpty) {
-                                                showToast(
-                                                    'Please enter your reason to leave');
-                                              } else {
-                                                _submitleaveForm();
-                                              }
-                                            },
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 16.0),
-                                              child: Text(
-                                                "Submit",
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                        ),
+                                        const SizedBox(height: 2.0),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15.0, right: 20.0),
+                                          child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.07,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    child: const Text(
+                                                        "Apply Leave",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                  Container(
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Checkbox(
+                                                          checkColor:
+                                                              Colors.white,
+                                                          activeColor:
+                                                              kPrimaryColor,
+                                                          value:
+                                                              fulldaytypevalue,
+                                                          onChanged:
+                                                              (newValue) {
+                                                            if (newValue ==
+                                                                true) {
+                                                              setState(() {
+                                                                leavetypeValue =
+                                                                    "2";
+                                                                fulldaytypevalue =
+                                                                    newValue;
+                                                                halfdaytypevalue =
+                                                                    false;
+
+                                                                _fboxvisibility =
+                                                                    true;
+                                                                _fullleavedateVisibility =
+                                                                    true;
+                                                                _hboxvisibility =
+                                                                    false;
+                                                                _requesttypevisibility =
+                                                                    false;
+                                                                _halfdaydateVisibilty =
+                                                                    false;
+                                                              });
+                                                            }
+                                                          },
+                                                        ),
+                                                        const Text("FULL DAY",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 5.0),
+                                                        Checkbox(
+                                                          checkColor:
+                                                              Colors.white,
+                                                          activeColor:
+                                                              kPrimaryColor,
+                                                          value:
+                                                              halfdaytypevalue,
+                                                          onChanged:
+                                                              (newValue) {
+                                                            if (newValue ==
+                                                                true) {
+                                                              setState(() {
+                                                                leavetypeValue =
+                                                                    "1";
+                                                                fulldaytypevalue =
+                                                                    false;
+                                                                halfdaytypevalue =
+                                                                    newValue;
+
+                                                                _fboxvisibility =
+                                                                    false;
+                                                                _fullleavedateVisibility =
+                                                                    false;
+                                                                _hboxvisibility =
+                                                                    true;
+                                                                _requesttypevisibility =
+                                                                    true;
+                                                                _halfdaydateVisibilty =
+                                                                    true;
+                                                              });
+                                                            }
+                                                          },
+                                                        ),
+                                                        const Text("HALF DAY",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                        const SizedBox(height: 2.0),
+                                        Visibility(
+                                          visible: _fullleavedateVisibility,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, right: 10.0),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.06,
+                                              width: double.infinity,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _selectStartDate(context);
+                                                    },
+                                                    child: Card(
+                                                      elevation: 4.0,
+                                                      child: Container(
+                                                          height:
+                                                              MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.06,
+                                                          color: Colors
+                                                              .grey.shade300,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.42,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10.0),
+                                                                child: Text(
+                                                                  startDate,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade700,
+                                                                      fontSize:
+                                                                          16.0),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          10.0),
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      _selectStartDate(
+                                                                          context);
+                                                                    },
+                                                                    child: Image
+                                                                        .asset(
+                                                                            'assets/icons/calendar.png'),
+                                                                  )),
+                                                            ],
+                                                          )),
+                                                    ),
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _selectedEndDate(context);
+                                                    },
+                                                    child: Card(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                      elevation: 4.0,
+                                                      child: Container(
+                                                          height:
+                                                              MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.09,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.42,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10.0),
+                                                                child: Text(
+                                                                  endDate,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade700,
+                                                                      fontSize:
+                                                                          16.0),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          10.0),
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      _selectedEndDate(
+                                                                          context);
+                                                                    },
+                                                                    child: Image
+                                                                        .asset(
+                                                                            'assets/icons/calendar.png'),
+                                                                  )),
+                                                            ],
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Visibility(
+                                            visible: _fboxvisibility,
+                                            child: const SizedBox(height: 2.0)),
+                                        Visibility(
+                                          visible: _requesttypevisibility,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, right: 10.0),
+                                            child: Card(
+                                              color: Colors.grey.shade300,
+                                              elevation: 4.0,
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.06,
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey.shade300,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
+                                                  child:
+                                                      DropdownButtonHideUnderline(
+                                                    child:
+                                                        DropdownButton<String>(
+                                                      hint: const Text(
+                                                          "Request Type",
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .black)),
+                                                      value: leavereqtypeValue,
+                                                      elevation: 16,
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade700,
+                                                          fontSize: 16),
+                                                      onChanged: (String data) {
+                                                        setState(() {
+                                                          leavereqtypeValue =
+                                                              data;
+                                                          if (leavereqtypeValue ==
+                                                              "Seconf Half") {
+                                                            leaverq = "2";
+                                                          } else {
+                                                            leaverq = "1";
+                                                          }
+                                                        });
+                                                      },
+                                                      items: leavetypeItems.map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2.0),
+                                        Visibility(
+                                          visible: _halfdaydateVisibilty,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, right: 10.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                _selectDate(context);
+                                              },
+                                              child: Card(
+                                                color: Colors.grey.shade300,
+                                                elevation: 4.0,
+                                                child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.06,
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors
+                                                            .grey.shade300,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(25)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10.0),
+                                                          child: Text(
+                                                            selectedDate.day
+                                                                    .toString() +
+                                                                "-" +
+                                                                selectedDate
+                                                                    .month
+                                                                    .toString() +
+                                                                "-" +
+                                                                selectedDate
+                                                                    .year
+                                                                    .toString(),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700,
+                                                                fontSize: 16.0),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right:
+                                                                        10.0),
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                _selectDate(
+                                                                    context);
+                                                              },
+                                                              child: Image.asset(
+                                                                  'assets/icons/calendar.png'),
+                                                            )),
+                                                      ],
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Visibility(
+                                            visible: _hboxvisibility,
+                                            child: SizedBox(height: 2.0)),
+                                        _textInputField("Additional Note",
+                                            reasonController),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            height: 45.0,
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: kPrimaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                if (fulldaytypevalue) {
+                                                  if (startDate.toString() ==
+                                                      "From Date") {
+                                                    showToast(
+                                                        "Please select start date");
+                                                  } else if (endDate
+                                                          .toString() ==
+                                                      "To Date") {
+                                                    showToast(
+                                                        "Please select end date");
+                                                  } else if (reasonController
+                                                      .text
+                                                      .toString()
+                                                      .isEmpty) {
+                                                    showToast(
+                                                        'Please enter your reason to leave');
+                                                  } else {
+                                                    _submitleaveForm();
+                                                  }
+                                                } else {
+                                                  if (leaverq == "") {
+                                                    showToast(
+                                                        "Please select Request Type");
+                                                  } else if (reasonController
+                                                      .text
+                                                      .toString()
+                                                      .isEmpty) {
+                                                    showToast(
+                                                        'Please enter your reason to leave');
+                                                  } else {
+                                                    _submitleaveForm();
+                                                  }
+                                                }
+                                                // if (reasonController.text
+                                                //     .toString()
+                                                //     .isEmpty) {
+                                                //   showToast(
+                                                //       'Please enter your reason to leave');
+                                                // } else {
+                                                //   _submitleaveForm();
+                                                // }
+                                              },
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 16.0),
+                                                child: Text(
+                                                  "Submit",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10.0, bottom: 30),
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                    color: Colors.grey.shade300,
+                                    elevation: 4.0,
+                                    child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.07,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade300,
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10.0),
+                                          child: Row(
+                                            children: [
+                                              empbranch == "" ||
+                                                      empbranch == null
+                                                  ? const SizedBox()
+                                                  : Expanded(
+                                                      child: Text(
+                                                        empbranch,
+                                                        style: const TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )),
         ],
@@ -977,6 +1113,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
 
   Widget _textInputField(String text, TextEditingController _controller) {
     return Padding(
+      key: key,
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Card(
         elevation: 4.0,
@@ -990,6 +1127,10 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(15)),
           child: TextField(
+            onTap: () {
+              Scrollable.ensureVisible(key.currentContext,
+                  duration: Duration(milliseconds: 1300));
+            },
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: text,
@@ -1139,6 +1280,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
           Uri.parse(BASE_URL + leaveformUrl),
           body: body,
         );
+
+        print(BASE_URL + leaveformUrl);
+        print(jsonEncode(body));
         if (response.statusCode == 200) {
           setState(() {
             Future.delayed(Duration(seconds: 1)).then((value) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:skyways_group/constants/constant.dart';
 import 'package:skyways_group/screens/birthday_and_anniversary_screen.dart';
 import 'package:skyways_group/screens/employee_directory_screen.dart';
@@ -14,9 +14,9 @@ import 'package:skyways_group/screens/salary_slips_screen.dart';
 import 'package:skyways_group/screens/splash_screen.dart';
 import 'package:skyways_group/screens/workanniversary_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(debug: true);
+  // await FlutterDownloader.initialize(debug: true);
   runApp(const MyApp());
 }
 
@@ -35,19 +35,24 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       onGenerateRoute: (settings) {
         if (settings.name == '/leavestatusscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => LeaveStatusScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => LeaveStatusScreen());
         }
         if (settings.name == '/empdirectoryscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => EmployeeDirectoryScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => EmployeeDirectoryScreen());
         }
         if (settings.name == '/leaveapplyscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => LeaveApplicationScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => LeaveApplicationScreen());
         }
         if (settings.name == '/birthdayscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => BirthdayAnniversaryScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => BirthdayAnniversaryScreen());
         }
         if (settings.name == '/anniversaryscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => WorkAnniversaryScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => WorkAnniversaryScreen());
         }
         if (settings.name == '/profilescreen') {
           return PageRouteBuilder(pageBuilder: (_, __, ___) => ProfileScreen());
@@ -56,17 +61,22 @@ class MyApp extends StatelessWidget {
           return PageRouteBuilder(pageBuilder: (_, __, ___) => HomeScreen());
         }
         if (settings.name == '/salaryslipscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => SalarySlipScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => SalarySlipScreen());
         }
         if (settings.name == '/noticeboardscreen') {
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => NoticeBoardScreen());
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => NoticeBoardScreen());
         }
-        if(settings.name == '/notificationscreen'){
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => NotificationsScreen());
+        if (settings.name == '/notificationscreen') {
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => NotificationsScreen());
         }
-        if(settings.name == '/noticeboarddetailscreen'){
+        if (settings.name == '/noticeboarddetailscreen') {
           var obj = settings.arguments;
-          return PageRouteBuilder(pageBuilder: (_, __, ___) => NoticeBoardDetailScreen(argument: obj));
+          return PageRouteBuilder(
+              pageBuilder: (_, __, ___) =>
+                  NoticeBoardDetailScreen(argument: obj));
         }
 
         return null;
@@ -74,4 +84,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

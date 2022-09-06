@@ -22,7 +22,6 @@ class LeaveStatusScreen extends StatefulWidget {
 }
 
 class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
-
   String empname;
   String empid;
   String photo;
@@ -46,253 +45,289 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: Stack(
-        children: [
-          Positioned(
-              left: 0,
-              bottom: 0,
-              right: 0,
-              child: SvgPicture.asset('assets/svg/mask_group_other.svg', fit: BoxFit.fill)
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 0.0, right: 10.0),
-                  child: Row(
-                    children: [
-                      IconButton(onPressed: (){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-                      }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
-                      Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20),
-                          child: const Text("Leave Application",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold))),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20.0, top: 10.0, right: 20.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.pushReplacementNamed(context, '/leaveapplyscreen');
+    return WillPopScope(
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          body: Stack(
+            children: [
+              Positioned(
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                  child: SvgPicture.asset('assets/svg/mask_group_other.svg',
+                      fit: BoxFit.fill)),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HomeScreen()));
                               },
-                              child: Container(
-                                //height: MediaQuery.of(context).size.height * 0.06,
-                                //width: MediaQuery.of(context).size.width * 0.35,
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade300,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(25.0))),
-                                child: const Text("Create Leaves",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14.0)),
-                              ),
-                            ),
-                            Container(
-                              padding : const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(25.0))),
-                              child: const Text("Leave Status",
+                              icon: const Icon(Icons.arrow_back_ios,
+                                  color: Colors.black, size: 20)),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.20),
+                              child: const Text("Leave Application",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 14.0)),
+                                      color: Colors.black87,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold))),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, top: 10.0, right: 20.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/leaveapplyscreen');
+                                  },
+                                  child: Container(
+                                    //height: MediaQuery.of(context).size.height * 0.06,
+                                    //width: MediaQuery.of(context).size.width * 0.35,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 15),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade300,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(25.0))),
+                                    child: const Text("Create Leaves",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0)),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25.0))),
+                                  child: const Text("Leave Status",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14.0)),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text("Recent Leave Application",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold))),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 10.0, right: 8.0),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.70,
-                          width: double.infinity,
-                          child: FutureBuilder(
-                              future: _getleavestatuslist(),
-                              builder: (context, AsyncSnapshot snapshot) {
-                                List<LeaveStatusData> list = snapshot.data;
-                                if (!snapshot.hasData) {
-                                  return Center(child: Container(
-                                      height: 24.0,
-                                      width: 24.0,
-                                      child: const CircularProgressIndicator(color: kPrimaryColor)));
-                                } else {
-                                  return ListView.separated(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    padding: EdgeInsets.zero,
-                                    separatorBuilder: (context, index) {
-                                      return const Divider(
-                                          color: Colors.transparent,
-                                          height: 6.0);
-                                    },
-                                    itemCount: list.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(5.0),
-                                            child: Container(
-                                              height: MediaQuery.of(context).size.height * 0.08,
-                                              width: MediaQuery.of(context).size.width * 0.16,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: kPrimaryColor,
-                                                    width: 2, //8
-                                                  ),
-                                                  image: DecorationImage(fit: BoxFit.cover, image:  photo == "" || photo == null ? AssetImage('assets/images/person.jpg') : NetworkImage(photo),
-                                                  )),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets.only(
-                                                  left: 5.0,
-                                                  right: 5.0),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .center,
-                                                  children: <Widget>[
-                                                    Text(empname,
-                                                        style: const TextStyle(
-                                                            color: Colors
-                                                                .black,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold)),
-                                                    const SizedBox(
-                                                        height: 5.0),
-                                                    list[index].empFullDay ==
-                                                        "2" ||
-                                                        list[index]
-                                                            .empFullDay ==
-                                                            null
-                                                        ? Text(
-                                                        list[index]
-                                                            .empFulldayFromdate +
-                                                            " to " +
-                                                            list[index]
-                                                                .empFulldayTodate,
-                                                        style: const TextStyle(
-                                                            color:
-                                                            kPrimaryColor,
-                                                            fontSize:
-                                                            12.0))
-                                                        : Text(
-                                                        list[index]
-                                                            .empHalfDayDate,
-                                                        style: const TextStyle(
-                                                            color:
-                                                            kPrimaryColor,
-                                                            fontSize:
-                                                            12.0)),
-                                                    const SizedBox(
-                                                        height: 5.0),
-                                                    Text(
-                                                        list[index]
-                                                            .empReasonforleave,
-                                                        style:
-                                                        const TextStyle(
-                                                            color: Colors
-                                                                .grey,
-                                                            fontSize:
-                                                            10.0)),
-                                                  ]),
-                                            ),
-                                          ),
-                                          Column(
+                          ),
+                          const SizedBox(height: 20.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text("Recent Leave Application",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold))),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, top: 10.0, right: 8.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.70,
+                              width: double.infinity,
+                              child: FutureBuilder(
+                                  future: _getleavestatuslist(),
+                                  builder: (context, AsyncSnapshot snapshot) {
+                                    List<LeaveStatusData> list = snapshot.data;
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                          child: Container(
+                                              height: 24.0,
+                                              width: 24.0,
+                                              child:
+                                                  const CircularProgressIndicator(
+                                                      color: kPrimaryColor)));
+                                    } else {
+                                      return ListView.separated(
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        padding: EdgeInsets.zero,
+                                        separatorBuilder: (context, index) {
+                                          return const Divider(
+                                              color: Colors.transparent,
+                                              height: 6.0);
+                                        },
+                                        itemCount: list.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              const SizedBox(height: 5.0),
-                                              list[index].empFullDay == "2"
-                                                  ? const Text("FULL DAY",
-                                                  style: TextStyle(
-                                                      color:
-                                                      Colors.grey,
-                                                      fontSize: 12.0))
-                                                  : const Text("HALF DAY",
-                                                  style: TextStyle(
-                                                      color:
-                                                      Colors.grey,
-                                                      fontSize: 12.0)),
-                                              const SizedBox(height: 8.0),
                                               Padding(
-                                                  padding: EdgeInsets.only(bottom: 2.0, top: 5.0, right: 8.0),
-                                                  child: getStaus(list[index].leaveStatus, list[index].id))
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.08,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.16,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: kPrimaryColor,
+                                                        width: 2, //8
+                                                      ),
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: photo == "" ||
+                                                                photo == null
+                                                            ? AssetImage(
+                                                                'assets/images/person.jpg')
+                                                            : NetworkImage(
+                                                                photo),
+                                                      )),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5.0,
+                                                          right: 5.0),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: <Widget>[
+                                                        Text(empname,
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            height: 5.0),
+                                                        list[index].empFullDay ==
+                                                                    "2" ||
+                                                                list[index]
+                                                                        .empFullDay ==
+                                                                    null
+                                                            ? Text(
+                                                                list[index]
+                                                                        .empFulldayFromdate +
+                                                                    " to " +
+                                                                    list[index]
+                                                                        .empFulldayTodate,
+                                                                style: const TextStyle(
+                                                                    color:
+                                                                        kPrimaryColor,
+                                                                    fontSize:
+                                                                        12.0))
+                                                            : Text(
+                                                                list[index]
+                                                                    .empHalfDayDate,
+                                                                style: const TextStyle(
+                                                                    color:
+                                                                        kPrimaryColor,
+                                                                    fontSize:
+                                                                        12.0)),
+                                                        const SizedBox(
+                                                            height: 5.0),
+                                                        Text(
+                                                            list[index]
+                                                                .empReasonforleave,
+                                                            style:
+                                                                const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        10.0)),
+                                                      ]),
+                                                ),
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const SizedBox(height: 5.0),
+                                                  list[index].empFullDay == "2"
+                                                      ? const Text("FULL DAY",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 12.0))
+                                                      : const Text("HALF DAY",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 12.0)),
+                                                  const SizedBox(height: 8.0),
+                                                  Padding(
+                                                      padding: EdgeInsets.only(
+                                                          bottom: 2.0,
+                                                          top: 5.0,
+                                                          right: 8.0),
+                                                      child: getStaus(
+                                                          list[index]
+                                                              .leaveStatus,
+                                                          list[index].id))
+                                                ],
+                                              )
                                             ],
-                                          )
-                                        ],
+                                          );
+                                        },
                                       );
-                                    },
-                                  );
-                                }
-                              }),
-                        ),
+                                    }
+                                  }),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ),
-        onWillPop: _willPopCallback
-    );
+        ),
+        onWillPop: _willPopCallback);
   }
 
   Future<List<LeaveStatusData>> _getleavestatuslist() async {
@@ -302,12 +337,18 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
       "branch_id": prefs.getString('empbranchid'),
       "emp_id": prefs.getString('employee_id'),
     };
-    var response = await http.post(Uri.parse(BASE_URL + leavelistUrl),
+    var response = await http.post(
+      Uri.parse(BASE_URL + leavelistUrl),
       body: body,
     );
+    print(BASE_URL + leavelistUrl);
+    print(jsonEncode(body));
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
-      List<LeaveStatusData> leavestatuslist = list.map((m) => LeaveStatusData.fromJson(m)).toList();
+      // List list = temp.toList().reversed.toList();
+      List<LeaveStatusData> leavestatuslist =
+          list.map((m) => LeaveStatusData.fromJson(m)).toList();
+
       return leavestatuslist;
     } else {
       print(response.body);
@@ -318,7 +359,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
   Widget getStaus(String statusValue, String id) {
     if (statusValue == "0") {
       return GestureDetector(
-        onTap: (){
+        onTap: () {
           DialogHelper.selfCancelLeave(id, context);
         },
         child: Container(
@@ -330,13 +371,13 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(25.0))),
             child: const Text("Pending",
                 textAlign: TextAlign.center,
-                style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w400))),
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400))),
       );
     }
     if (statusValue == "1") {
       return GestureDetector(
-        onTap: (){
+        onTap: () {
           showToast("Leave Approved!");
         },
         child: Container(
@@ -348,14 +389,14 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(25.0))),
             child: const Text("Approved",
                 textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w400))),
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400))),
       );
     }
     if (statusValue == "2") {
       return GestureDetector(
-        onTap: (){
-           showToast("Leave Disapproved!");
+        onTap: () {
+          showToast("Leave Disapproved!");
         },
         child: Container(
             height: 25.0,
@@ -366,13 +407,13 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(25.0))),
             child: const Text("Disapproved",
                 textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w400))),
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400))),
       );
     }
-    if(statusValue == "3"){
+    if (statusValue == "3") {
       return GestureDetector(
-        onTap: (){
+        onTap: () {
           showToast("Already Canceled!");
         },
         child: Container(
@@ -384,14 +425,14 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(25.0))),
             child: const Text("Cancel",
                 textAlign: TextAlign.center,
-                style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w400))),
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400))),
       );
     }
   }
 
   Future<bool> _willPopCallback() async {
-    return Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    return Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
-
 }

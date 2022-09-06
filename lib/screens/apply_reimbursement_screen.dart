@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,13 +21,12 @@ import 'package:skyways_group/screens/home_sceen.dart';
 import 'package:skyways_group/screens/reimbursement_screen.dart';
 
 class ApplyReimbursementScreen extends StatefulWidget {
-
   @override
-  _ApplyReimbursementScreenState createState() => _ApplyReimbursementScreenState();
+  _ApplyReimbursementScreenState createState() =>
+      _ApplyReimbursementScreenState();
 }
 
 class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
-
   String empid;
   String empbranch;
   String empbranchid;
@@ -56,7 +58,8 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     super.initState();
 
     initConnectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
 
     _getProfileDetails();
     _getexpenselist();
@@ -98,11 +101,11 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     return _updateConnectionStatus(result);
   }
 
-  _getProfileDetails() async{
+  _getProfileDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      print("emp id"+prefs.getString('employee_id')); //id 1305
-      print("branch name"+prefs.getString('branchname')); //branch chennai
+      print("emp id" + prefs.getString('employee_id')); //id 1305
+      print("branch name" + prefs.getString('branchname')); //branch chennai
       empid = prefs.getString('employee_id');
       empbranch = prefs.getString('branchname');
 
@@ -110,27 +113,24 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     });
   }
 
-  _branchlist() async{
+  _branchlist() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final body = {
-      "api_access_token": "ywrtaw46veltitizqhbs"
-    };
+    final body = {"api_access_token": "ywrtaw46veltitizqhbs"};
     var response = await http.post(
-      Uri.parse(BASE_URL+branchlistUrl),
+      Uri.parse(BASE_URL + branchlistUrl),
       body: body,
     );
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
       var _branchlist = list.map((m) => BranchData.fromJson(m)).toList();
-      for(var i=0; i<_branchlist.length;i++){
-        if(empbranch == _branchlist[i].branchName){
+      for (var i = 0; i < _branchlist.length; i++) {
+        if (empbranch == _branchlist[i].branchName) {
           setState(() {
             empbranchid = _branchlist[i].id;
             prefs.setString('empbranchid', empbranchid);
           });
         }
       }
-
     } else {
       print(response.body);
       throw Exception('Failed to get data due to ${response.body}');
@@ -139,8 +139,7 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-   /* pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    /* pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
     pr.style(
       progress: 80.0,
       message: "Please wait...",
@@ -158,9 +157,11 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
               left: 0,
               bottom: 0,
               right: 0,
-              child: SvgPicture.asset('assets/svg/mask_group_other.svg', fit: BoxFit.fill)
-          ),
-          Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+              child: SvgPicture.asset('assets/svg/mask_group_other.svg',
+                  fit: BoxFit.fill)),
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -169,13 +170,25 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                     padding: const EdgeInsets.only(left: 0.0, right: 10.0),
                     child: Row(
                       children: [
-                        IconButton(onPressed: (){
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => const HomeScreen()));
-                        }, icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeScreen()));
+                            },
+                            icon: Icon(Icons.arrow_back_ios,
+                                color: Colors.black, size: 20)),
                         Padding(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22),
-                            child: Text("Reimbursement", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.22),
+                            child: Text("Reimbursement",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold))),
                       ],
                     ),
                   ),
@@ -187,44 +200,59 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                         color: Colors.transparent,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.0),
-                            topRight: Radius.circular(20.0)
-                        )
-                    ),
+                            topRight: Radius.circular(20.0))),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+                          padding: EdgeInsets.only(
+                              left: 20.0, top: 10.0, right: 20.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
-                                onTap: (){},
+                                onTap: () {},
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height * 0.06,
-                                  width: MediaQuery.of(context).size.width * 0.35,
-                                  alignment: Alignment.center,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.all(Radius.circular(25.0))
-
-                                  ),
-                                    child: const Text("Apply", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14.0))),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25.0))),
+                                    child: const Text("Apply",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14.0))),
                               ),
                               GestureDetector(
-                                 onTap: (){
-                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ReimbursementScreen()));
-                                 },
-                                 child: Container(
-                                   height: MediaQuery.of(context).size.height * 0.06,
-                                   width: MediaQuery.of(context).size.width * 0.35,
-                                   alignment: Alignment.center,
-                                   decoration: BoxDecoration(
-                                       color: Colors.grey.shade300,
-                                       borderRadius: BorderRadius.all(Radius.circular(25.0))),
-                                       child: const Text("List", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 14.0))),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReimbursementScreen()));
+                                },
+                                child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade300,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25.0))),
+                                    child: const Text("List",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0))),
                               )
                             ],
                           ),
@@ -237,38 +265,55 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.04),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                                  padding:
+                                      EdgeInsets.only(left: 10.0, right: 10.0),
                                   child: Card(
                                     color: Colors.grey.shade300,
                                     elevation: 4.0,
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height * 0.06,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.06,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
-                                          borderRadius: BorderRadius.circular(25)
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 10.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
                                         child: DropdownButtonHideUnderline(
                                           child: DropdownButton<String>(
-                                            hint: const Text("Expense Type", style: TextStyle(color: Colors.black)),
+                                            hint: const Text("Expense Type",
+                                                style: TextStyle(
+                                                    color: Colors.black)),
                                             value: expensetype,
                                             elevation: 16,
-                                            style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.grey.shade700,
+                                                fontSize: 16),
                                             onChanged: (String data) {
                                               setState(() {
-                                                   demoList.forEach((element) {
-                                                      if(element['name'].toString() == data.toString()){
-                                                        expensetype = data.toString();
-                                                        expensetypevalue = element['id'].toString();
-                                                      }
-                                                   });
+                                                demoList.forEach((element) {
+                                                  if (element['name']
+                                                          .toString() ==
+                                                      data.toString()) {
+                                                    expensetype =
+                                                        data.toString();
+                                                    expensetypevalue =
+                                                        element['id']
+                                                            .toString();
+                                                  }
+                                                });
                                               });
                                             },
-                                            items: _data.map<DropdownMenuItem<String>>((String value) {
+                                            items: _data
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
                                               return DropdownMenuItem<String>(
                                                 value: value,
                                                 child: Text(value),
@@ -281,47 +326,109 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                   ),
                                 ),
                                 const SizedBox(height: 15.0),
-                                _textInputField("Expense Remarks", remarksController, TextInputType.text),
+                                _textInputField("Expense Remarks",
+                                    remarksController, TextInputType.text),
                                 const SizedBox(height: 15.0),
-                                _textInputField("Expense Amount", expenseamtController, TextInputType.number),
+                                _textInputField("Expense Amount",
+                                    expenseamtController, TextInputType.number),
                                 const SizedBox(height: 15.0),
-                                _textInputField("Others", othersConroller, TextInputType.text),
+                                _textInputField("Others", othersConroller,
+                                    TextInputType.text),
                                 const SizedBox(height: 15.0),
                                 Padding(
-                                    padding: EdgeInsets.only(left: 10, right: 10),
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
                                     child: Card(
                                       elevation: 4.0,
                                       color: Colors.grey.shade300,
                                       child: Container(
-                                        height: MediaQuery.of(context).size.height * 0.06,
-                                        padding: EdgeInsets.only(left: 10, right: 10),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
                                         width: double.infinity,
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                             color: Colors.grey.shade300,
-                                            borderRadius: BorderRadius.circular(15)
-                                        ),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                              docPic == "Select Document Proof" || docPic == null || docPic.toString() == "" ? const SizedBox() : CircleAvatar(
-                                              radius: 18,
-                                              backgroundImage: FileImage(File(_imageCheque.path)),
-                                            ),
+                                            docPic == "Select Document Proof" ||
+                                                    docPic == null ||
+                                                    docPic.toString() == ""
+                                                ? const SizedBox()
+                                                : CircleAvatar(
+                                                    radius: 18,
+                                                    backgroundImage: FileImage(
+                                                        File(
+                                                            _imageCheque.path)),
+                                                  ),
                                             const SizedBox(width: 5.0),
-                                            Expanded(child: Text('$docPic', style: TextStyle(color: Colors.grey[600], fontSize: 14.0))),
+                                            Expanded(
+                                                child: Text('$docPic',
+                                                    style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 14.0))),
                                             RaisedButton(
                                                 color: Colors.grey,
                                                 elevation: 0,
-                                                child: Text("Browse", style: TextStyle(color: Colors.grey[700])),
+                                                child: Text("Browse",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.grey[700])),
                                                 onPressed: () {
                                                   _showDocPicker(context);
+                                                  // showDialog(
+                                                  //     context: context,
+                                                  //     builder:
+                                                  //         (context) =>
+                                                  //             AlertDialog(
+                                                  //               title: Text(
+                                                  //                   "Select"),
+                                                  //               content: Row(
+                                                  //                 mainAxisAlignment:
+                                                  //                     MainAxisAlignment
+                                                  //                         .spaceEvenly,
+                                                  //                 children: [
+                                                  //                   ElevatedButton(
+                                                  //                       onPressed:
+                                                  //                           () async {
+                                                  //                         Navigator.of(context)
+                                                  //                             .pop();
+                                                  //                         FilePickerResult
+                                                  //                             result =
+                                                  //                             await FilePicker.platform.pickFiles();
+
+                                                  //                         if (result !=
+                                                  //                             null) {
+                                                  //                           docPic =
+                                                  //                               result.files.single.path.toString();
+                                                  //                         }
+                                                  //                       },
+                                                  //                       child: Text(
+                                                  //                           "Document")),
+                                                  //                   ElevatedButton(
+                                                  //                       onPressed:
+                                                  //                           () {
+                                                  //                         Navigator.of(context)
+                                                  //                             .pop();
+                                                  //                         _showDocPicker(
+                                                  //                             context);
+                                                  //                       },
+                                                  //                       child: Text(
+                                                  //                           "Image"))
+                                                  //                 ],
+                                                  //               ),
+                                                  //             ));
                                                 }),
                                           ],
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                                 const SizedBox(height: 40.0),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -334,34 +441,63 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                     ),
                                     child: FlatButton(
                                       onPressed: () {
-                                        if(expensetype.toString() == "" || expensetype == null){
-                                          showToast('Please select expense type');
+                                        if (expensetype.toString() == "" ||
+                                            expensetype == null) {
+                                          showToast(
+                                              'Please select expense type');
                                           return;
                                         }
-                                        if(remarksController.text.toString().trim().isEmpty || remarksController.text.toString() == ""){
-                                          showToast('Please enter your remarks');
+                                        if (remarksController.text
+                                                .toString()
+                                                .trim()
+                                                .isEmpty ||
+                                            remarksController.text.toString() ==
+                                                "") {
+                                          showToast(
+                                              'Please enter your remarks');
                                           return;
                                         }
-                                        if(expenseamtController.text.toString().isEmpty){
-                                          showToast('Please enter expense amount');
+                                        if (expenseamtController.text
+                                            .toString()
+                                            .isEmpty) {
+                                          showToast(
+                                              'Please enter expense amount');
                                           return;
                                         }
-                                        if(othersConroller.text.toString().isEmpty){
-                                          showToast('Please enter other details');
+                                        if (othersConroller.text
+                                            .toString()
+                                            .isEmpty) {
+                                          showToast(
+                                              'Please enter other details');
                                           return;
                                         }
-                                        if(docPic == "Select Document Proof" || docPic == null || docPic.toString() == "" || docPic.toString() == "null"){
-                                          showToast('Please upload your document');
+                                        if (docPic == "Select Document Proof" ||
+                                            docPic == null ||
+                                            docPic.toString() == "" ||
+                                            docPic.toString() == "null") {
+                                          showToast(
+                                              'Please upload your document');
                                           return;
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                  title: Text("Please Wait"),
+                                                  content: Row(children: [
+                                                    CircularProgressIndicator(),
+                                                    SizedBox(width: 10),
+                                                    Text("Loading...")
+                                                  ])));
+                                          _submit(
+                                              remarksController.text.toString(),
+                                              expenseamtController.text
+                                                  .toString(),
+                                              othersConroller.text.toString());
                                         }
-                                        else{
-                                          showDialog(context: context, builder: (context)=>AlertDialog(title:Text("Please Wait"),content:Row(children:[CircularProgressIndicator(),SizedBox(width:10),Text("Loading...")])));
-                                          _submit(remarksController.text.toString(), expenseamtController.text.toString(), othersConroller.text.toString());
-                                        }
-
                                       },
                                       child: const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 16.0),
                                         child: Text(
                                           "Submit",
                                           style: TextStyle(color: Colors.white),
@@ -381,12 +517,13 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
               ),
             ),
           ),
-
         ],
-      ),);
+      ),
+    );
   }
 
-  Widget _textInputField(String text, TextEditingController _controller, TextInputType _inputType){
+  Widget _textInputField(String text, TextEditingController _controller,
+      TextInputType _inputType) {
     return Padding(
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: Card(
@@ -398,8 +535,7 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(15)
-          ),
+              borderRadius: BorderRadius.circular(15)),
           child: TextField(
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(left: 10.0, bottom: 5.0),
@@ -415,12 +551,11 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     );
   }
 
+  void _submit(String remarks, String expense, String others) async {
+    print("Image here " + _imageCheque.path);
 
-  void _submit(String remarks, String expense, String others) async
-  {
-    print("Image here "+_imageCheque.path);
-
-    var requestMulti = http.MultipartRequest('POST', Uri.parse(BASE_URL + applyreimbursementUrl));
+    var requestMulti = http.MultipartRequest(
+        'POST', Uri.parse(BASE_URL + applyreimbursementUrl));
     requestMulti.fields["emp_id"] = empid.toString();
     requestMulti.fields["branch_id"] = empbranchid.toString();
     requestMulti.fields["type_of_expense"] = expensetypevalue;
@@ -429,26 +564,25 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     requestMulti.fields["others_text"] = others;
     requestMulti.fields["api_access_token"] = "ywrtaw46veltitizqhbs";
 
-    requestMulti.files.add(await http.MultipartFile.fromPath('doc_proof', _imageCheque.path));
+    requestMulti.files
+        .add(await http.MultipartFile.fromPath('doc_proof', _imageCheque.path));
 
     requestMulti.send().then((response) {
       response.stream.toBytes().then((value) {
-
-          var responseString = String.fromCharCodes(value);
-          var jsonData = jsonDecode(responseString);
-          Navigator.of(context).pop();
-          print(jsonData);
-          if (jsonData['success'] == true) {
-            showToast(jsonData['message'].toString());
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ReimbursementScreen()));
-          } else {
-            showToast(jsonData['message'].toString());
-          }
-
+        var responseString = String.fromCharCodes(value);
+        var jsonData = jsonDecode(responseString);
+        Navigator.of(context).pop();
+        print(jsonData);
+        if (jsonData['success'] == true) {
+          showToast(jsonData['message'].toString());
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => ReimbursementScreen()));
+        } else {
+          showToast(jsonData['message'].toString());
+        }
       });
     });
   }
-
 
   Future<List<ExpenseData>> _getexpenselist() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -464,8 +598,8 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
       setState(() {
         demoList = json.decode(response.body)['data'];
         demoList.forEach((element) {
-            _data.add(element['name'].toString());
-            _dataid.add(element['id'].toString());
+          _data.add(element['name'].toString());
+          _dataid.add(element['id'].toString());
         });
       });
       //Iterable list = json.decode(response.body)['data'];
@@ -484,9 +618,7 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
     }
   }
 
-
-  void _showDocPicker(context)
-  {
+  void _showDocPicker(context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -516,19 +648,21 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
         });
   }
 
-  _docimgFromCamera() async{
-      final ImagePicker _picker = ImagePicker();
-      final XFile photo = await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
+  _docimgFromCamera() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile photo =
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
-      setState(() {
-        _imageCheque = photo;
-        docPic = _imageCheque.path.split('/').last;
-      });
+    setState(() {
+      _imageCheque = photo;
+      docPic = _imageCheque.path.split('/').last;
+    });
   }
 
   _docimgFromGallery() async {
     final ImagePicker _picker = ImagePicker();
-    XFile image = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    XFile image =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
 
     setState(() {
       _imageCheque = image;

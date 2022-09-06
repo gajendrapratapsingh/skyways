@@ -21,22 +21,22 @@ class LeaveRequestScreen extends StatefulWidget {
 }
 
 class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   ProgressDialog pr;
 
   @override
   Widget build(BuildContext context) {
-
-    pr = new ProgressDialog(context,type: ProgressDialogType.Normal);
+    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
     pr.style(
       progress: 80.0,
       message: "Please wait...",
       progressWidget: Container(
-          padding: EdgeInsets.all(10.0), child: CircularProgressIndicator(color: kPrimaryColor)),
+          padding: EdgeInsets.all(10.0),
+          child: CircularProgressIndicator(color: kPrimaryColor)),
       maxProgress: 100.0,
-      progressTextStyle: TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w100),
+      progressTextStyle: TextStyle(
+          color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w100),
     );
     return Scaffold(
       key: _scaffoldKey,
@@ -46,10 +46,11 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
               left: 0,
               bottom: 0,
               right: 0,
-              child: SvgPicture.asset('assets/svg/mask_group_other.svg', fit: BoxFit.fill)
-          ),
+              child: SvgPicture.asset('assets/svg/mask_group_other.svg',
+                  fit: BoxFit.fill)),
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -57,64 +58,77 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                   padding: const EdgeInsets.only(left: 0.0, right: 10.0),
                   child: Row(
                     children: [
-                      IconButton(onPressed: (){
-                        Navigator.pop(context);
-                      }, icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.arrow_back_ios,
+                              color: Colors.black, size: 20)),
                       Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22),
-                          child: const Text("Leave Request", textAlign: TextAlign.center, style: TextStyle(color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.bold))),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.22),
+                          child: const Text("Leave Request",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold))),
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: FutureBuilder(
-                            future: _getleaverqtlist(),
-                            builder: (context, AsyncSnapshot snapshot) {
-                              List<PendingData> list = [];
-                              list.clear();
-                              list = snapshot.data;
-                              if (!snapshot.hasData) {
-                                return Container(
-                                  height: MediaQuery.of(context).size.height/1.5,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(color: kPrimaryColor),
-                                  ),
-                                );
-                              }
-                              else if(list.isEmpty){
-                                 return Container(
-                                   height: MediaQuery.of(context).size.height/1.5,
-                                   child: const Center(
-                                     child: Text("No Data Available"),
-                                   ),
-                                 );
-                              }
-                              else {
-                                return ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  separatorBuilder: (context, index) {
-                                    return const Divider(
-                                        color: Colors.transparent,
-                                        height: 6.0);
-                                  },
-                                  itemCount: list.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return _listItem(list[index].id, list[index].empId, list[index].leaveStatus, list[index].empFullDay, list[index].empFulldayTodate, list[index].empFulldayFromdate, list[index].empHalfDayDate, list[index].empReasonforleave, list[index].empHalfDayType);
-                                  },
-                                );
-                              }
-                            }),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: FutureBuilder(
+                        future: _getleaverqtlist(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          List<PendingData> list = [];
+                          list.clear();
+                          list = snapshot.data;
+                          if (!snapshot.hasData) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 1.5,
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                    color: kPrimaryColor),
+                              ),
+                            );
+                          } else if (list.isEmpty) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: Align(
+                                child: Text(
+                                  "No Data Available",
+                                  style: TextStyle(
+                                      color: Colors.red[900], fontSize: 20),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                    color: Colors.transparent, height: 6.0);
+                              },
+                              itemCount: list.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return _listItem(
+                                    list[index].id,
+                                    list[index].empId,
+                                    list[index].leaveStatus,
+                                    list[index].empFullDay,
+                                    list[index].empFulldayTodate,
+                                    list[index].empFulldayFromdate,
+                                    list[index].empHalfDayDate,
+                                    list[index].empReasonforleave,
+                                    list[index].empHalfDayType);
+                              },
+                            );
+                          }
+                        }),
                   ),
                 ),
               ],
@@ -125,7 +139,16 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
     );
   }
 
-  Widget _listItem(String id, String empid, String leavestatus, String fulldayvalue, String fulldaytodate, String fulldayfromdate, String halfdaydate, String leavereason, String halfdatetype){
+  Widget _listItem(
+      String id,
+      String empid,
+      String leavestatus,
+      String fulldayvalue,
+      String fulldaytodate,
+      String fulldayfromdate,
+      String halfdaydate,
+      String leavereason,
+      String halfdatetype) {
     return Padding(
       padding: EdgeInsets.all(4.0),
       child: Card(
@@ -139,89 +162,137 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Row(
-                     children: [
-                       const Text("Employee ID : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                       Text(empid, style: const TextStyle(fontSize: 14.0, color: Colors.black))
-                     ],
-                   ),
-                     fulldayvalue == "1" ? Row(
-                     mainAxisSize: MainAxisSize.min,
-                     children: const[
-                        Text("Leave Type : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                        Text("HALF DAY", style: TextStyle(fontSize: 14.0, color: Colors.black))
-                     ],
-                   ) : Row(
-                     mainAxisSize: MainAxisSize.min,
-                     children: const[
-                       Text("Leave Type : ", style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500)),
-                       Text("FULL DAY", style: TextStyle(fontSize: 14.0, color: Colors.black))
-                     ],
-                   )
+                  Row(
+                    children: [
+                      const Text("Employee ID : ",
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.w500)),
+                      Text(empid,
+                          style: const TextStyle(
+                              fontSize: 14.0, color: Colors.black))
+                    ],
+                  ),
+                  fulldayvalue == "1"
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text("Leave Type : ",
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500)),
+                            Text("HALF DAY",
+                                style: TextStyle(
+                                    fontSize: 14.0, color: Colors.black))
+                          ],
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text("Leave Type : ",
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500)),
+                            Text("FULL DAY",
+                                style: TextStyle(
+                                    fontSize: 14.0, color: Colors.black))
+                          ],
+                        )
                 ],
               ),
               const SizedBox(height: 15.0),
-              Row (
+              Row(
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.60,
-                    child: fulldayvalue == "1" ? Row(
-                      children: [
-                        const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                        halfdaydate.toString() == "null" || halfdaydate.toString()== "" ? const SizedBox() : Text(halfdaydate, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0))
-                      ],
-                    ) : Row(
-                      children: [
-                        const Text("Leave Date : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                        Expanded(child: Text(fulldayfromdate+" to "+fulldaytodate, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0)))
-                      ],
-                    ),
+                    child: fulldayvalue == "1"
+                        ? Row(
+                            children: [
+                              const Text("Leave Date : ",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500)),
+                              halfdaydate.toString() == "null" ||
+                                      halfdaydate.toString() == ""
+                                  ? const SizedBox()
+                                  : Text(halfdaydate,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 14.0))
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              const Text("Leave Date : ",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500)),
+                              Expanded(
+                                  child: Text(
+                                      fulldayfromdate + " to " + fulldaytodate,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 14.0)))
+                            ],
+                          ),
                   ),
                   getStaus(leavestatus)
                 ],
               ),
               const SizedBox(height: 15.0),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const Text("Leave Reason : ", style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500)),
-                  leavereason == null ? const SizedBox() : Expanded(child: Text(leavereason, maxLines: 2, style: const TextStyle(color: Colors.black, fontSize: 14.0)))
+                  const Text("Leave Reason : ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500)),
+                  leavereason == null
+                      ? const SizedBox()
+                      : Expanded(
+                          child: Text(leavereason,
+                              // maxLines: 2,
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 14.0)))
                 ],
               ),
               const SizedBox(height: 15.0),
               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                    GestureDetector(
-                       onTap: (){
-                         _changeleavestaus(id, "2");
-                       },
-                       child: Container(
-                          height: 45.0,
-                          width: 120,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                             color: Colors.red,
-                             borderRadius: BorderRadius.all(Radius.circular(8.0))
-                          ),
-                          child: Text("Reject", style: TextStyle(color: Colors.white)),
-                       ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _changeleavestaus(id, "2");
+                    },
+                    child: Container(
+                      height: 30.0,
+                      width: 120,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                      child:
+                          Text("Reject", style: TextStyle(color: Colors.white)),
                     ),
-                   GestureDetector(
-                     onTap: (){
-                       _changeleavestaus(id, "1");
-                     },
-                     child: Container(
-                       height: 45.0,
-                       width: 120,
-                       alignment: Alignment.center,
-                       decoration: const BoxDecoration(
-                           color: Colors.green,
-                           borderRadius: BorderRadius.all(Radius.circular(8.0))
-                       ),
-                       child: Text("Approve", style: TextStyle(color: Colors.white)),
-                     ),
-                   ),
-                 ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _changeleavestaus(id, "1");
+                    },
+                    child: Container(
+                      height: 30.0,
+                      width: 120,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                      child: Text("Approve",
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 8.0)
             ],
@@ -236,55 +307,57 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
     print(jsonEncode({
       "api_access_token": "ywrtaw46veltitizqhbs",
       //"reporting_manager" : "962",
-      "branch_id" : prefs.getString('branch_id'),
-      "reporting_manager" : prefs.getString('employee_id'),
+      "branch_id": prefs.getString('branch_id'),
+      "reporting_manager": prefs.getString('employee_id'),
     }));
     final body = {
       "api_access_token": "ywrtaw46veltitizqhbs",
       //"reporting_manager" : "962",
-      "branch_id" : prefs.getString('branch_id'),
-      "reporting_manager" : prefs.getString('employee_id'),
+      "branch_id": prefs.getString('branch_id'),
+      "reporting_manager": prefs.getString('employee_id'),
     };
-    var response = await http.post(Uri.parse(BASE_URL + pendingleavelistUrl),
+    var response = await http.post(
+      Uri.parse(BASE_URL + pendingleavelistUrl),
       body: body,
     );
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
-      List<PendingData> leavestatuslist = list.map((m) => PendingData.fromJson(m)).toList();
+      print(list.first);
+      List<PendingData> leavestatuslist =
+          list.map((m) => PendingData.fromJson(m)).toList();
       return leavestatuslist;
     } else {
-      print(response.body);
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text(json.decode(response.body)['error']['error'].toString(), style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red,
-
-       )
-      );
-      Iterable list =[];
-      List<PendingData> leavestatuslist = list.map((m) => PendingData.fromJson(m)).toList();
+      // print(response.body);
+      // _scaffoldKey.currentState.showSnackBar(SnackBar(
+      //   content: Text(json.decode(response.body)['error']['error'].toString(),
+      //       style: TextStyle(color: Colors.white)),
+      //   backgroundColor: Colors.red,
+      // ));
+      Iterable list = [];
+      List<PendingData> leavestatuslist =
+          list.map((m) => PendingData.fromJson(m)).toList();
       return leavestatuslist;
       throw Exception('Failed to get data due to ${response.body}');
     }
   }
 
-  void _changeleavestaus(String id, String status) async{
+  void _changeleavestaus(String id, String status) async {
     pr.show();
     final body = {
-      "api_access_token" : "ywrtaw46veltitizqhbs",
-      "id" : id,
-      "leave_status" : status, //(1=>Approved,2=>Dis-Approve )
-      "status_remarks" : "ok"  //not mandatory field
+      "api_access_token": "ywrtaw46veltitizqhbs",
+      "id": id,
+      "leave_status": status, //(1=>Approved,2=>Dis-Approve )
+      "status_remarks": "ok" //not mandatory field
     };
-    var response = await http.post(Uri.parse(BASE_URL + leaveStatuschangeUrl),
-      body: body,
-    );
+    print(jsonEncode(body));
+    print(BASE_URL + leaveStatuschangeUrl);
+    var response =
+        await http.post(Uri.parse(BASE_URL + leaveStatuschangeUrl), body: body);
+    Navigator.of(context).pop();
+    _getleaverqtlist();
     if (response.statusCode == 200) {
-       showToast(json.decode(response.body)['message']);
-       _getleaverqtlist();
-       pr.hide();
+      showToast(json.decode(response.body)['message']);
     } else {
-      print(response.body);
-      pr.hide();
       throw Exception('Failed to get data due to ${response.body}');
     }
   }
@@ -301,7 +374,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
           child: const Text("Pending",
               textAlign: TextAlign.center,
               style:
-              TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
     }
     if (statusValue == "1") {
       return Container(
@@ -314,7 +387,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
           child: const Text("Approved",
               textAlign: TextAlign.center,
               style:
-              TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
     }
     if (statusValue == "2") {
       return Container(
@@ -327,9 +400,9 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
           child: const Text("Disapproved",
               textAlign: TextAlign.center,
               style:
-              TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
     }
-    if(statusValue == "3"){
+    if (statusValue == "3") {
       return Container(
           height: 25.0,
           width: 80,
@@ -340,7 +413,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
           child: const Text("Cancel",
               textAlign: TextAlign.center,
               style:
-              TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400)));
     }
   }
 }

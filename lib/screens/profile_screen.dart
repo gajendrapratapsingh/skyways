@@ -23,7 +23,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   String name;
   String designation;
   String department;
@@ -41,25 +40,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool salaryVisibility = false;
 
-
-
   @override
   void initState() {
     super.initState();
     _getProfileDetails();
   }
 
-  _getProfileDetails() async{
+  _getProfileDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState((){
-       photo = prefs.getString('emp_image');
+    setState(() {
+      photo = prefs.getString('emp_image');
     });
     final body = {
-      "api_access_token" : "ywrtaw46veltitizqhbs",
-      "employee_id" : prefs.getString('employee_id')
+      "api_access_token": "ywrtaw46veltitizqhbs",
+      "employee_id": prefs.getString('employee_id')
     };
     var response = await http.post(
-      Uri.parse(BASE_URL+employeelistUrl),
+      Uri.parse(BASE_URL + employeelistUrl),
       body: body,
     );
     if (response.statusCode == 200) {
@@ -84,7 +81,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -95,8 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Positioned(
                 right: 0,
-                child: SvgPicture.asset('assets/svg/mask_group_other.svg', fit: BoxFit.fill)
-            ),
+                child: SvgPicture.asset('assets/svg/mask_group_other.svg',
+                    fit: BoxFit.fill)),
             Column(
               children: <Widget>[
                 Info(
@@ -106,13 +102,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   designation: designation,
                 ),
                 Text(
-                  bloodgroup == "" || bloodgroup == null ? "" : "Blood Group: "+bloodgroup,
+                  bloodgroup == "" || bloodgroup == null
+                      ? ""
+                      : "Blood Group: " + bloodgroup,
                   style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                 ),
-               /* Padding(
+                /* Padding(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),*/
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                 Padding(
-                  padding: const EdgeInsets.only(left: 15.0,  right: 15.0),
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -151,8 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(5.0),
                           topRight: Radius.circular(5.0),
-                        )
-                    ),
+                        )),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Row(
@@ -162,9 +159,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text("Joining Date", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                              const Text("Joining Date",
+                                  style: TextStyle(
+                                      color: kPrimaryColor, fontSize: 14.0)),
                               const SizedBox(height: 2.0),
-                              Text(joindate == "" || joindate == null ? "" : joindate, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                              Text(
+                                  joindate == "" || joindate == null
+                                      ? ""
+                                      : joindate,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14.0)),
                             ],
                           ),
                           const VerticalDivider(
@@ -172,18 +176,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.white,
                           ),
                           InkWell(
-                            onTap: (){
-                               setState(() {
-                                 salaryVisibility = !salaryVisibility;
-                               });
+                            onTap: () {
+                              setState(() {
+                                salaryVisibility = !salaryVisibility;
+                              });
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text("Net Salary", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                                const Text("Net Salary",
+                                    style: TextStyle(
+                                        color: kPrimaryColor, fontSize: 14.0)),
                                 const SizedBox(height: 2.0),
-                                salaryVisibility == false ? const Text("******", style: TextStyle(color: Colors.white, fontSize: 14.0)) : Text(salary == "" || salary == null ? "" : salary, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                                salaryVisibility == false
+                                    ? const Text("******",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14.0))
+                                    : Text(
+                                        salary == "" || salary == null
+                                            ? ""
+                                            : salary,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14.0)),
                               ],
                             ),
                           ),
@@ -202,44 +220,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(5.0),
                           bottomRight: Radius.circular(5.0),
-                        )
-                    ),
+                        )),
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Reporting Manager", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                          const Text("Reporting Manager",
+                              style: TextStyle(
+                                  color: kPrimaryColor, fontSize: 14.0)),
                           const SizedBox(height: 2.0),
-                          Text(reportingmanager == "" || reportingmanager == null ? "" : reportingmanager, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                          Text(
+                              reportingmanager == "" || reportingmanager == null
+                                  ? ""
+                                  : reportingmanager,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0)),
                           const SizedBox(height: 5.0),
                           Divider(height: 1, color: Colors.grey.shade50),
                           const SizedBox(height: 2.0),
-                          const Text("Department", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                          const Text("Department",
+                              style: TextStyle(
+                                  color: kPrimaryColor, fontSize: 14.0)),
                           const SizedBox(height: 2.0),
-                          Text(department == "" || department == null ? "" : department, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                          Text(
+                              department == "" || department == null
+                                  ? ""
+                                  : department,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0)),
                           const SizedBox(height: 5.0),
                           Divider(height: 1, color: Colors.grey.shade50),
                           const SizedBox(height: 2.0),
-                          const Text("Permanent Address", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                          const Text("Permanent Address",
+                              style: TextStyle(
+                                  color: kPrimaryColor, fontSize: 14.0)),
                           const SizedBox(height: 2.0),
-                          Text(address == "" || address == null ? "" : address, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                          Text(address == "" || address == null ? "" : address,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0)),
                           const SizedBox(height: 5.0),
                           Divider(height: 1, color: Colors.grey.shade50),
                           const SizedBox(height: 2.0),
-                          const Text("Current Address", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                          const Text("Current Address",
+                              style: TextStyle(
+                                  color: kPrimaryColor, fontSize: 14.0)),
                           const SizedBox(height: 2.0),
-                          Text(currentaddress == "" || currentaddress == null ? "" : currentaddress, style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                          Text(
+                              currentaddress == "" || currentaddress == null
+                                  ? ""
+                                  : currentaddress,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0)),
                           const SizedBox(height: 5.0),
                           Divider(height: 1, color: Colors.grey.shade50),
                           const SizedBox(height: 5.0),
-                          const Text("Emergency Contact", style: TextStyle(color: kPrimaryColor, fontSize: 14.0)),
+                          const Text("Emergency Contact",
+                              style: TextStyle(
+                                  color: kPrimaryColor, fontSize: 14.0)),
                           const SizedBox(height: 2.0),
-                          Text(emergencycontact == "" || emergencycontact == null ? "" : emergencycontact, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14.0))
+                          Text(
+                              emergencycontact == "" || emergencycontact == null
+                                  ? ""
+                                  : emergencycontact,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0))
                         ],
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Ver: 1.0.4+5",
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
                 )
               ],
             ),
@@ -254,55 +311,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return AppBar(
       elevation: 0.0,
       backgroundColor: kCornerShapeColor,
-      leading: IconButton(onPressed:(){
-        Navigator.pop(context);
-      }, icon: const Icon(Icons.arrow_back_ios, size: 20.0, color: Colors.white,
-      ),
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          size: 20.0,
+          color: Colors.white,
+        ),
       ),
       centerTitle: true,
       title: const Text("Profile", style: TextStyle(color: Colors.white)),
       actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: GestureDetector(
-               onTap: (){
-                 DialogHelper.logout(context);
-               },
-               child: const Icon(Icons.logout, size: 24.0, color: Colors.white),
-            ),
-          )
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: GestureDetector(
+            onTap: () {
+              DialogHelper.logout(context);
+            },
+            child: const Icon(Icons.logout, size: 24.0, color: Colors.white),
+          ),
+        )
       ],
     );
   }
 
-
-  openwhatsapp(String mobile) async{
+  openwhatsapp(String mobile) async {
     print("Open whatsapp");
-    var whatsapp ="+91"+mobile;
-    var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=Hello";
-    var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("Hello")}";
-    if(Platform.isIOS){
+    var whatsapp = "+91" + mobile;
+    var whatsappURl_android =
+        "whatsapp://send?phone=" + whatsapp + "&text=Hello";
+    var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("Hello")}";
+    if (Platform.isIOS) {
       // for iOS phone only
-      if( await canLaunch(whatappURL_ios)){
+      if (await canLaunch(whatappURL_ios)) {
         await launch(whatappURL_ios, forceSafariVC: false);
-      }else{
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("whatsapp no installed")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
       }
-    }else{
+    } else {
       // android , web
-      if( await canLaunch(whatsappURl_android)){
+      if (await canLaunch(whatsappURl_android)) {
         await launch(whatsappURl_android);
-      }else{
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("whatsapp no installed")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
       }
     }
   }
 
-  _launchEmail(String email){
+  _launchEmail(String email) {
     launch('mailto:$email?subject=&body=');
   }
 }
-
-
